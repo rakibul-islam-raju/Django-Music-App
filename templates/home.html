@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load music_tags %}
 
 {% block body %}
 
@@ -14,7 +15,7 @@
         </div>
         <div class="duration flex justify-between px-2">
             <div class="">00:00</div>
-            <div class="">{{ music.time_length }}</div>
+            <div class="">00:00</div>
         </div>
         <div class="player-btn flex flex-wrap justify-center space-x-4">
             <i class="text-gray-500 cursor-pointer hover:text-green-500 fas fa-backward"></i>
@@ -26,6 +27,7 @@
                 <i class="text-gray-500 text-2xl hover:text-green-500 fas fa-play-circle"></i> <span class="text-gray-800 font-bold">{{ music.title|title }}</span>
             </div>
             <div class="">
+                <span class="text-sm text-gray-500 mr-2">{{ music.time_length|length_formatter }}</span>
                 <i class="text-gray-500 hover:text-green-500 fas fa-download"></i>
             </div>
         </div>
