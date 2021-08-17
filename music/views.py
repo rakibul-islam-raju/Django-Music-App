@@ -3,7 +3,9 @@ from django.shortcuts import render
 
 
 def home_page(request):
+    musics =  Music.objects.all()
     context = {
-        'musics': Music.objects.all()
+        'musics': musics,
+        'music_list': list(musics.values())
     }
     return render(request, 'home.html', context)
