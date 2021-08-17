@@ -1,6 +1,8 @@
 const player = document.getElementById('audioPlayer')
 const prev = document.getElementById('prev')
 const play = document.getElementById('play')
+const pause = document.getElementById('pause')
+pause.style.display = 'none'
 const next = document.getElementById('next')
 const musicTitle = document.getElementById('musicTitle')
 const artist = document.getElementById('artist')
@@ -16,6 +18,8 @@ let musicIndex = 0;
 // get music from dom
 const musics = JSON.parse(document.getElementById('musics').textContent)
 
+console.log(musics);
+
 
 // functions
 const setSRC = () => {
@@ -23,8 +27,8 @@ const setSRC = () => {
     musicTitle.textContent = musics[musicIndex].title
     artist.textContent = musics[musicIndex].artist
     coverImage.setAttribute('src', `/media/${musics[musicIndex].cover_image}`)
-    if (musics[musicIndex].album != null){
-        album.textContent = musics[musicIndex].album
+    if (musics[musicIndex].album__name !== null){
+        album.textContent = musics[musicIndex].album__name
     } else {
         album.textContent = 'Single'
     }
@@ -53,5 +57,19 @@ player.pause()
 
 // play
 play.addEventListener('click', () => {
+    play.style.display = 'none'
+    pause.style.display = 'block'
     playOrPause()
+})
+// pause
+pause.addEventListener('click', () => {
+    play.style.display = 'block'
+    pause.style.display = 'none'
+    playOrPause()
+})
+
+
+// load duration for ui
+player.addEventListener('loadedmetadata', () => {
+    duration.textContent = formatAudioLength(player.duration)
 })

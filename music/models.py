@@ -8,7 +8,7 @@ class Album(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 class Music(models.Model):
     title = models.CharField(max_length=500)
