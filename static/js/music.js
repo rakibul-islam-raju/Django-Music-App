@@ -9,7 +9,9 @@ const artist = document.getElementById('artist')
 const album = document.getElementById('album')
 const coverImage = document.getElementById('coverImage')
 const duration = document.getElementById('duration')
-const currentDuration = document.getElementById('currentDuration')
+const currentTime = document.getElementById('currentDuration')
+const progress_container = document.getElementById('progress_container')
+const progress = document.getElementById('progress')
 
 
 // init music indexing
@@ -66,6 +68,21 @@ pause.addEventListener('click', () => {
     play.style.display = 'block'
     pause.style.display = 'none'
     playOrPause()
+})
+
+// update progress bar
+player.addEventListener('timeupdate', () => {
+    let sec = player.currentTime
+    console.log('sec', player.currentTime);
+    let total = player.duration
+
+    currentTime.textContent = formatAudioLength(player.currentTime)
+
+    let progress_container_width = progress_container.offsetWidth
+    let progress_width = progress.offsetWidth
+    let audio_played = ( sec / total ) *100
+    let newWidth =  progress_container_width * (audio_played / 100)
+    progress.style.width = `${newWidth}px`
 })
 
 

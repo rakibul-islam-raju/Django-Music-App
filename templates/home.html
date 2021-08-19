@@ -14,11 +14,18 @@
                 <h6 id="album" class="text-md">{{ music.album }}</h6>
             </div>
         </div>
-        <div class="duration flex justify-between px-2">
+        <div>
+            <div id="progress_container" class="relative h-1 bg-gray-200">
+                <div id="progress" class="absolute h-full w-2 bg-green-500 flex items-center justify-end">
+                <div class="rounded-full w-3 h-3 bg-white shadow"></div>
+                </div>
+            </div>
+        </div>
+        <div class="duration flex justify-between px-2 mt-2">
             <div id="currentDuration" class="">00:00</div>
             <div id="duration" class="">{{ music.time_length|length_formatter }}</div>
         </div>
-        <div class="player-btn flex justify-center space-x-2 py-4">
+        <div class="player-btn flex justify-center space-x-4 py-4">
             <i id="prev" class="text-gray-500 cursor-pointer hover:text-green-500 fas fa-backward text-xl"></i>
             <i id="play" class="text-gray-500 cursor-pointer hover:text-green-500 fas fa-play text-xl"></i>
             <i id="pause" class="text-gray-500 cursor-pointer hover:text-green-500 fas fa-pause text-xl"></i>
