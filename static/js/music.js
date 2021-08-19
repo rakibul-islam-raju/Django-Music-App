@@ -39,8 +39,12 @@ const setSRC = () => {
 const playOrPause = () => {
     if (player.paused){
         player.play()
+        play.style.display = 'none'
+        pause.style.display = 'block'
     } else {
         player.pause()
+        play.style.display = 'block'
+        pause.style.display = 'none'
     }
 }
 
@@ -59,14 +63,10 @@ player.pause()
 
 // play
 play.addEventListener('click', () => {
-    play.style.display = 'none'
-    pause.style.display = 'block'
     playOrPause()
 })
 // pause
 pause.addEventListener('click', () => {
-    play.style.display = 'block'
-    pause.style.display = 'none'
     playOrPause()
 })
 
@@ -83,6 +83,26 @@ player.addEventListener('timeupdate', () => {
     let audio_played = ( sec / total ) *100
     let newWidth =  progress_container_width * (audio_played / 100)
     progress.style.width = `${newWidth}px`
+})
+
+// prev track
+prev.addEventListener('click', () => {
+    musicIndex = musicIndex - 1
+    if (musicIndex < 0) {
+        musicIndex = musics.length - 1
+    }
+    setSRC()
+    playOrPause()
+})
+
+// next track
+next.addEventListener('click', () => {
+    musicIndex = musicIndex + 1
+    if (musicIndex > (musics.length - 1)) {
+        musicIndex = 0
+    }
+    setSRC()
+    playOrPause()
 })
 
 

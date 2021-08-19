@@ -10,7 +10,7 @@ def validate_audio(file):
         audio = MP3(file)
         if not audio:
             raise TypeError()
-            file_checked = True
+        file_checked = True
     except Exception as e:
         file_checked = False
     if not file_checked:
