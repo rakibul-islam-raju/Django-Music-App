@@ -5,17 +5,18 @@
 {% block body %}
 
 <section class="mt-8 px-5 md:px-0">
-    {% for music in musics %}
+    {% for album in albums %}
     <div class="card rounded w-full md:w-2/4 mx-auto bg-white shadow mb-8">
         <div class="relative">
-            <img id="coverImage" class="rounded" src="{{ music.cover_image.url }}" alt="{{ music.title }}">
+            <img id="coverImage" class="rounded" src="{{ album.cover_image.url }}" alt="{{ album.name }}">
             <div class="absolute left-0 bottom-0 w-full text-white bg-black bg-opacity-60 p-4 font-bold">
-                <h4 id="artist" class="text-lg">{{ music.artist }}</h4>
+                <h4 id="musicTitle" class="text-lg">{{ music.title }}</h4>
+                {% comment %} <h4 id="artist" class="text-lg">{{ music.artist }}</h4> {% endcomment %}
                 <h6 id="album" class="text-md">{{ music.album }}</h6>
             </div>
         </div>
-        <div>
-            <div id="progress_container" class="relative h-1 bg-gray-200">
+        <div id="progress_container" class="cursor-pointer">
+            <div class="relative h-1 bg-gray-200">
                 <div id="progress" class="absolute h-full w-2 bg-green-500 flex items-center justify-end">
                 <div class="rounded-full w-3 h-3 bg-white shadow"></div>
                 </div>
@@ -23,7 +24,7 @@
         </div>
         <div class="duration flex justify-between px-2 mt-2">
             <div id="currentDuration" class="">00:00</div>
-            <div id="duration" class="">{{ music.time_length|length_formatter }}</div>
+            <div id="duration" class="">00:00</div>
         </div>
         <div class="player-btn flex justify-center space-x-4 py-4">
             <i id="prev" class="text-gray-500 cursor-pointer hover:text-green-500 fas fa-backward text-xl"></i>
@@ -33,14 +34,24 @@
             <audio id="audioPlayer" class="w-full bg-green-300 text-white" src="{{ music.audio_file.url }}" preload="metadata" autoplay="false">
             </audio>
         </div>
-        <div class=" border-t py-2 border-gray-200 px-2 text-lg flex justify-between hover:bg-gray-200">
-            <div class="flex space-x-2 items-center">
-                <i class="text-gray-500 text-2xl hover:text-green-500 fas fa-play-circle"></i> <span id="musicTitle" class="text-gray-800 font-bold">{{ music.title|title }}</span>
-            </div>
-            <div class="">
-                <span class="text-sm text-gray-500 mr-2">{{ music.time_length|length_formatter }}</span>
-                <i class="text-gray-500 hover:text-green-500 fas fa-download"></i>
-            </div>
+
+        <div class=" border-t border-gray-200 text-lg">
+            <ul>
+                {% for music in musics %}
+                    <li class="track py-2 px-2 flex justify-between hover:bg-gray-200">
+                        <div class="flex space-x-2 items-center">
+                            <i class="text-gray-500 text-2xl hover:text-green-500 fas fa-play-circle"></i> 
+                            <span class="text-gray-800 font-bold">
+                                <span id="artist">{{ music.artist }}</span> - {{ music.title|title }}
+                            </span>
+                        </div>
+                        <div class="">
+                            <span class="text-sm text-gray-500 mr-2">{{ music.time_length|length_formatter }}</span>
+                            <i class="text-gray-500 hover:text-green-500 fas fa-download"></i>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
     {% endfor %}
